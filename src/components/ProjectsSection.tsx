@@ -7,37 +7,37 @@ const songs = [
   {
     title: "🎶 Kalam Eineh (كلام عينيه)",
     description: "Sherine — lembut, emosional, dan dalam banget 💭",
-    image: "/stillyoung.jpg",
+    image: "/sherine.jpg",
     color: "from-sky-400 via-indigo-400 to-purple-400",
   },
   {
     title: "💙 El Watar El Hassas",
     description: "Sherine — lagu yang nyentuh perasaan 💔",
-    image: "/everythinguare.jpg",
+    image: "/sherine2.jpg",
     color: "from-pink-300 via-rose-400 to-orange-300",
   },
   {
     title: "✨ Ah W Noss",
     description: "Nancy Ajram — ringan, catchy, dan enak didengar 🌸",
-    image: "/goldenhunter.jpg",
+    image: "/wnos.jpg",
     color: "from-yellow-300 via-orange-400 to-pink-400",
   },
   {
     title: "🤍 For the Rest of My Life",
     description: "Maher Zain — tenang, hangat, dan penuh makna 🌙",
-    image: "/youridol.jpg",
+    image: "/fortherest.jpg",
     color: "from-purple-400 via-pink-400 to-fuchsia-400",
   },
   {
     title: "🥀 Tak Segampang Itu",
     description: "Anggi Marito — galau tapi indah 🎧",
-    image: "/sodapop.jpg",
+    image: "/taksegampang.jpg",
     color: "from-green-300 via-emerald-400 to-teal-400",
   },
   {
     title: "💫 Takkan Terganti",
     description: "Marcell — klasik dan penuh kenangan ✨",
-    image: "/attention.jpg",
+    image: "/takkanterganti.jpg",
     color: "from-sky-300 via-cyan-300 to-indigo-300",
   },
 ];
