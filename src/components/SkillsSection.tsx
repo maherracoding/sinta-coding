@@ -1,136 +1,118 @@
 import { motion } from 'framer-motion';
 
-const skills = {
-  frontend: [
-    { name: 'React', level: 95 },
-    { name: 'TypeScript', level: 90 },
-    { name: 'Next.js', level: 88 },
-    { name: 'Tailwind CSS', level: 95 },
-    { name: 'Vue.js', level: 75 },
+const subjects = {
+  favorit: [
+    { name: 'Informatika 💻✨', level: 93 },
+    { name: 'Matematika ➗✨', level: 90 },
+    { name: 'Bahasa Inggris ✨', level: 85 },
+    { name: 'Seni Budaya 🎨✨', level: 87 },
+    { name: 'Agama 📿✨', level: 94 },
   ],
-  backend: [
-    { name: 'Node.js', level: 90 },
-    { name: 'Python', level: 85 },
-    { name: 'PostgreSQL', level: 88 },
-    { name: 'MongoDB', level: 82 },
-    { name: 'GraphQL', level: 78 },
+
+  utama: [
+    { name: 'Matematika ➗', level: 90 },
+    { name: 'Bahasa Indonesia 📖', level: 95 },
+    { name: 'Bahasa Inggris ✨', level: 85 },
+    { name: 'IPA 🔬', level: 88 },
+    { name: 'IPS 🌍', level: 82 },
   ],
-  tools: [
-    { name: 'Git', level: 95 },
-    { name: 'Docker', level: 80 },
-    { name: 'AWS', level: 75 },
-    { name: 'Figma', level: 85 },
-    { name: 'CI/CD', level: 82 },
+
+  tambahan: [
+    { name: 'PPKn 🇮🇩', level: 92 },
+    { name: 'PJOK 🏃‍♀️', level: 80 },
+    { name: 'Prakarya 🧵', level: 84 },
+    { name: 'TIK 💻', level: 89 },
+    { name: 'Sejarah 📜', level: 86 },
   ],
 };
 
-function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
+function MapelBar({ name, level }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      className="space-y-2"
-    >
-      <div className="flex justify-between items-center">
-        <span className="font-medium">{name}</span>
-        <span className="text-sm text-muted-foreground">{level}%</span>
+    <div className="space-y-1">
+      <div className="flex justify-between text-sm">
+        <span className="text-pink-800 dark:text-pink-200">{name}</span>
+        <span className="text-pink-400">{level}% ✨</span>
       </div>
-      <div className="h-2 bg-muted rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: delay + 0.2, ease: 'easeOut' }}
-          className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
+
+      <div className="h-2 rounded-full bg-pink-100 dark:bg-[#140a18] overflow-hidden">
+        <div
+          className="h-full rounded-full transition-all
+                     bg-gradient-to-r from-pink-400 via-rose-300 to-orange-300"
+          style={{ width: `${level}%` }}
         />
       </div>
+    </div>
+  );
+}
+
+function Box({ title, emoji, children }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="p-5 rounded-2xl border
+                 border-pink-200 dark:border-pink-800
+                 bg-white/70 dark:bg-[#140a18]
+                 shadow-md hover:shadow-lg transition"
+    >
+      <h3 className="text-lg font-semibold mb-4 text-pink-700 dark:text-pink-200">
+        {emoji} {title}
+      </h3>
+
+      <div className="space-y-4">{children}</div>
     </motion.div>
   );
 }
 
-export default function SkillsSection() {
+export default function MapelSection() {
   return (
-    <section id="skills" className="py-20 md:py-32">
-      <div className="container mx-auto px-4">
+    <section
+      id="skills"
+      className="py-16 md:py-24 bg-pink-50 dark:bg-[#0a0510]
+                 text-pink-900 dark:text-pink-100 transition-colors"
+    >
+      <div className="container mx-auto px-4 max-w-6xl">
+
+        {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <span className="text-primary font-medium mb-2 block">Keahlian</span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Skills &amp; Teknologi
+          <span className="text-pink-400 text-sm">
+            📚 Things I Learn
+          </span>
+
+          <h2 className="text-3xl md:text-4xl font-bold mt-2 text-pink-700 dark:text-pink-200">
+            Subjects I Spend Time On ✨
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+
+          <div className="w-16 h-1 bg-gradient-to-r from-pink-400 to-orange-300 mx-auto mt-3 rounded-full" />
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Frontend */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="p-6 glass rounded-2xl shadow-card hover:shadow-card-hover transition-shadow"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <span className="text-2xl">🎨</span>
-              </div>
-              <h3 className="font-display text-xl font-bold">Frontend</h3>
-            </div>
-            <div className="space-y-4">
-              {skills.frontend.map((skill, index) => (
-                <SkillBar key={skill.name} {...skill} delay={index * 0.1} />
-              ))}
-            </div>
-          </motion.div>
+        {/* BOX GRID */}
+        <div className="grid md:grid-cols-3 gap-6">
 
-          {/* Backend */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="p-6 glass rounded-2xl shadow-card hover:shadow-card-hover transition-shadow"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <span className="text-2xl">⚙️</span>
-              </div>
-              <h3 className="font-display text-xl font-bold">Backend</h3>
-            </div>
-            <div className="space-y-4">
-              {skills.backend.map((skill, index) => (
-                <SkillBar key={skill.name} {...skill} delay={index * 0.1} />
-              ))}
-            </div>
-          </motion.div>
+          <Box title="Yang Lagi Aku Nikmati" emoji="🌸">
+            {subjects.favorit.map((item) => (
+              <MapelBar key={item.name} {...item} />
+            ))}
+          </Box>
 
-          {/* Tools */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="p-6 glass rounded-2xl shadow-card hover:shadow-card-hover transition-shadow"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <span className="text-2xl">🛠️</span>
-              </div>
-              <h3 className="font-display text-xl font-bold">Tools &amp; Lainnya</h3>
-            </div>
-            <div className="space-y-4">
-              {skills.tools.map((skill, index) => (
-                <SkillBar key={skill.name} {...skill} delay={index * 0.1} />
-              ))}
-            </div>
-          </motion.div>
+          <Box title="Pelajaran Harian" emoji="📖">
+            {subjects.utama.map((item) => (
+              <MapelBar key={item.name} {...item} />
+            ))}
+          </Box>
+
+          <Box title="Tambahan & Pelengkap" emoji="✨">
+            {subjects.tambahan.map((item) => (
+              <MapelBar key={item.name} {...item} />
+            ))}
+          </Box>
+
         </div>
       </div>
     </section>

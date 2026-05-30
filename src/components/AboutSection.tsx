@@ -73,7 +73,7 @@ export default function AboutSection() {
 
                 <div className="w-[260px] md:w-[320px] lg:w-[360px] aspect-square rounded-2xl overflow-hidden border border-pink-200 dark:border-pink-800 shadow-lg relative">
                   <img
-                    src="/fotoenaw3.jpg"
+                    src="/fotosinta2.jpg"
                     alt="profile"
                     className="w-full h-full object-cover hover:scale-105 transition duration-500"
                   />
