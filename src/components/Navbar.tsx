@@ -47,53 +47,70 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, [active]);
 
+  // 🔥 FIX: SINGLE OBSERVER + BEST VISIBILITY
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    const sections = navItems
+      .map((item) => ({
+        href: item.href,
+        el: document.querySelector(item.href),
+      }))
+      .filter((s) => s.el) as { href: string; el: Element }[];
 
-    navItems.forEach((item, index) => {
-      const section = document.querySelector(item.href);
-      if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // kalau lagi klik scroll → jangan ganggu
+        if (targetRef.current) return;
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry.isIntersecting) return;
+        // cari section dengan visibility terbesar
+        let maxRatio = 0;
+        let currentSection: string | null = null;
 
-          if (targetRef.current && targetRef.current !== item.href) return;
-
-          setActive(item.href);
-          updatePosition(index);
-
-          if (targetRef.current === item.href) {
-            targetRef.current = null;
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio;
+            currentSection = `#${entry.target.id}`;
           }
-        },
-        {
-          rootMargin: '-40% 0px -40% 0px',
+        });
+
+        if (currentSection && currentSection !== active) {
+          const index = navItems.findIndex((i) => i.href === currentSection);
+          if (index !== -1) {
+            setActive(currentSection);
+            updatePosition(index);
+          }
         }
-      );
+      },
+      {
+        threshold: [0.3, 0.5, 0.7], // 🔥 lebih stabil
+      }
+    );
 
-      observer.observe(section);
-      observers.push(observer);
-    });
+    sections.forEach((s) => observer.observe(s.el));
 
-    return () => observers.forEach((obs) => obs.disconnect());
-  }, []);
+    return () => observer.disconnect();
+  }, [active]);
 
   const scrollToSection = (href: string, index: number) => {
     const el = document.querySelector(href);
     if (!el) return;
 
     targetRef.current = href;
+
     setActive(href);
     updatePosition(index);
 
     el.scrollIntoView({ behavior: 'smooth' });
+
+    // 🔥 unlock setelah scroll selesai
+    setTimeout(() => {
+      targetRef.current = null;
+    }, 800);
   };
 
   return (
     <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
 
-      {/* 🌸 GLOW PINK-PEACH */}
+      {/* 🌸 GLOW */}
       <div className="absolute inset-0 blur-2xl opacity-40 bg-gradient-to-r from-pink-400/30 via-rose-300/20 to-orange-200/30 rounded-full pointer-events-none" />
 
       <div
@@ -103,11 +120,9 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
             : 'bg-white/80 border-pink-200/40'
         } shadow-[0_0_35px_rgba(255,140,170,0.25)]`}
       >
-
-        {/* NAV */}
         <div className="relative flex items-center">
 
-          {/* 🌈 CAPSULE */}
+          {/* CAPSULE */}
           <motion.div
             className="absolute top-0 bottom-0 rounded-full"
             animate={{
@@ -132,8 +147,8 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
                 active === item.href
                   ? 'bg-gradient-to-r from-pink-400 via-rose-300 to-orange-300 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(255,120,160,0.9)]'
                   : isDark
-                  ? 'text-white/70 hover:text-pink-300 hover:drop-shadow-[0_0_6px_rgba(255,120,160,0.6)]'
-                  : 'text-black/70 hover:text-pink-400 hover:drop-shadow-[0_0_6px_rgba(255,120,160,0.6)]'
+                  ? 'text-white/70 hover:text-pink-300'
+                  : 'text-black/70 hover:text-pink-400'
               }`}
             >
               {item.label}

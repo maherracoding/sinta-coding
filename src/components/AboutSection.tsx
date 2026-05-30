@@ -1,89 +1,153 @@
-import { motion } from 'framer-motion';
-import { Code2, Video, Coffee, Rocket } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Code2, Heart, Palette, Music } from 'lucide-react';
+import { useState } from 'react';
 
 export default function AboutSection() {
-  const stats = [
-    { icon: Code2, value: '50+', label: 'Projects Selesai' },
-    { icon: Video, value: '100+', label: 'Video Konten' },
-    { icon: Coffee, value: '1000+', label: 'Cangkir Kopi' },
-    { icon: Rocket, value: '5+', label: 'Tahun Pengalaman' },
+  const [open, setOpen] = useState(0);
+
+  const bioAccordion = [
+    {
+      title: '👩‍💻 Tentang Aku',
+      content:
+        'Hai! Aku Maherra Shyntta Mahfud, lahir di Banda Aceh, 14 April 2010. Sekarang aku masih pelajar dan lagi suka eksplor banyak hal baru, terutama yang berhubungan dengan kreativitas dan teknologi ✨',
+    },
+    {
+      title: '🎨 Hal yang Aku Nikmati',
+      content:
+        'Aku suka makeup 💄, dengerin musik 🎧, dan melukis 🎨. Buat aku, hal-hal ini jadi cara buat mengekspresikan diri dan bikin mood jadi lebih baik.',
+    },
+    {
+      title: '🎯 Tujuan & Harapan',
+      content:
+        'Aku punya impian untuk menjadi pegawai di Kementerian Perhubungan 🚆, supaya bisa ikut berkontribusi dalam perkembangan transportasi dan membantu banyak orang.',
+    },
+  ];
+
+  const biographyCards = [
+    { icon: Code2, text: 'Belajar Hal Baru 💻' },
+    { icon: Heart, text: 'Suka Kreativitas ✨' },
+    { icon: Palette, text: 'Makeup & Melukis 🎨' },
+    { icon: Music, text: 'Musik & Mood 🎧' },
   ];
 
   return (
-    <section id="about" className="py-20 md:py-32 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section
+      id="about"
+      className="py-16 md:py-24 bg-pink-50 dark:bg-[#0a0510] text-pink-900 dark:text-pink-100 transition-colors duration-500"
+    >
+      <div className="container mx-auto px-4 max-w-5xl">
+
+        {/* HEADER */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <span className="text-primary font-medium mb-2 block">Tentang Saya</span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Mengenal Lebih Dekat
+          <span className="text-pink-400 dark:text-pink-300 text-sm">
+            About Me 🌸
+          </span>
+
+          <h2 className="text-2xl md:text-4xl font-bold mt-2 text-pink-700 dark:text-pink-200">
+            A little story about me ✨
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+
+          <div className="w-16 h-1 bg-gradient-to-r from-pink-400 to-orange-300 mx-auto mt-3 rounded-full" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+
+          {/* FOTO */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
-            <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden glass shadow-card">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <span className="text-8xl">👨‍💻</span>
+            <div className="flex justify-center">
+              <div className="relative group">
+
+                {/* glow */}
+                <div className="absolute inset-0 rounded-2xl blur-xl
+                                bg-gradient-to-br from-pink-400/20 to-orange-200/20
+                                group-hover:blur-2xl transition" />
+
+                <div className="w-[260px] md:w-[320px] lg:w-[360px] aspect-square rounded-2xl overflow-hidden border border-pink-200 dark:border-pink-800 shadow-lg relative">
+                  <img
+                    src="/fotoenaw3.jpg"
+                    alt="profile"
+                    className="w-full h-full object-cover hover:scale-105 transition duration-500"
+                  />
                 </div>
-              </div>
-              <div className="absolute -bottom-6 -right-6 p-4 glass rounded-xl shadow-card">
-                <p className="font-display font-bold text-2xl text-gradient">5+ Tahun</p>
-                <p className="text-sm text-muted-foreground">Pengalaman</p>
+
               </div>
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            <h3 className="font-display text-2xl md:text-3xl font-bold">
-              Passionate Developer &amp; Creator
+          {/* CONTENT */}
+          <div className="space-y-5">
+
+            <h3 className="text-lg md:text-xl font-semibold text-pink-700 dark:text-pink-200">
+              ✨ Get to know me a bit closer
             </h3>
-            <p className="text-muted-foreground leading-relaxed">
-              Saya adalah seorang Fullstack Web Developer dengan passion yang kuat dalam menciptakan 
-              solusi digital yang inovatif. Dengan pengalaman lebih dari 5 tahun, saya telah 
-              membantu berbagai klien dan perusahaan dalam mewujudkan ide-ide mereka menjadi 
-              aplikasi web yang powerful dan user-friendly.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Selain coding, saya juga aktif sebagai Content Creator, berbagi pengetahuan 
-              tentang pemrograman dan teknologi melalui berbagai platform. Saya percaya bahwa 
-              berbagi ilmu adalah cara terbaik untuk terus belajar dan berkembang.
-            </p>
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              {stats.map((stat, index) => (
+
+            {/* ACCORDION */}
+            <div className="space-y-2">
+              {bioAccordion.map((item, index) => (
+                <div
+                  key={index}
+                  className="rounded-lg border border-pink-100 dark:border-pink-800 bg-white dark:bg-[#140a18] overflow-hidden"
+                >
+                  <button
+                    onClick={() => setOpen(open === index ? -1 : index)}
+                    className="w-full flex justify-between items-center px-4 py-3 text-sm font-medium text-pink-700 dark:text-pink-200 hover:bg-pink-50 dark:hover:bg-[#1b0f20] transition"
+                  >
+                    {item.title}
+                    <span className="text-pink-400">
+                      {open === index ? '−' : '+'}
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {open === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="px-4 pb-3 text-xs md:text-sm text-pink-600 dark:text-pink-300 leading-relaxed"
+                      >
+                        {item.content}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+
+            {/* BIO CARDS */}
+            <div className="grid grid-cols-2 gap-3 pt-4">
+              {biographyCards.map((item, index) => (
                 <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="p-4 glass rounded-xl text-center hover:shadow-card-hover transition-shadow"
+                  transition={{ delay: index * 0.1 }}
+                  className="p-3 rounded-lg text-center
+                             bg-gradient-to-br from-pink-100 to-orange-100
+                             dark:from-[#140a18] dark:to-[#1a0f1f]
+                             border border-pink-200 dark:border-pink-800
+                             hover:scale-[1.03] transition"
                 >
-                  <stat.icon className="h-6 w-6 text-primary mx-auto mb-2" />
-                  <p className="font-display text-2xl font-bold">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  <item.icon className="h-5 w-5 mx-auto mb-1 text-pink-400" />
+                  <p className="text-xs md:text-sm text-pink-700 dark:text-pink-200">
+                    {item.text}
+                  </p>
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+
+          </div>
         </div>
       </div>
     </section>
